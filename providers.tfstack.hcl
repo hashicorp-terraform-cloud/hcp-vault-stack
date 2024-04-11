@@ -1,8 +1,8 @@
 required_providers {
-  azurerm = {
-    source  = "hashicorp/hcp"
-    version = "~> 0.86.0"
-  }
+    hcp = {
+        source  = "hashicorp/hcp"
+        version = "~> 0.86.0"
+    }
     random = {
       source = "hashicorp/random"
       version = "~> 3.6.0"
