@@ -26,7 +26,7 @@ provider "hcp" "this" {
 
 provider "random" "this" {}
 
-provider "vault" "this {
+provider "vault" "this" {
   address = component.cluster.public_endpoint_url
   token   = component.cluster.bootrstrap_token
 }
