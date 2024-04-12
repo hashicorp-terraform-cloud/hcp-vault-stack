@@ -24,7 +24,7 @@ provider "hcp" "this" {
 
         workload_identity {
             resource_name = var.workload_idp_name
-            token_file    = var.identity_token_file
+            token_file    = var.hcp_identity_token_file
         }
     }
 }
@@ -51,7 +51,7 @@ provider "vault" "that" {
 
 provider "tfe" "this" {
     config {
-        organization = var.tfe_organization
+        organization = var.tfe_organisation
         token    = component.prereqs.tfe_token
     }
 }
