@@ -24,3 +24,8 @@ variable "hcp_project_id" {
     description = "the HCP project ID to use for the HCP Vault cluster"
     type        = string
 }
+
+variable "tfc_organisation" {
+    description = "The Terraform Cloud organisation used in the bound claim"
+    type        = string
+}
