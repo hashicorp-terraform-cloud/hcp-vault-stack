@@ -10,5 +10,5 @@ terraform {
 resource "random_uuid" "this" {}
 
 output "uuid" {
-  value = random_uuid.this.id
+  value = random_uuid.this.result
 }
