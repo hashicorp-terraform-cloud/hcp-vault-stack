@@ -61,7 +61,9 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "intermediate_ca" {
   exclude_cn_from_sans = true
   ou                   = "Demo"
   ttl                  = 7884000
-
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate_ca" {
