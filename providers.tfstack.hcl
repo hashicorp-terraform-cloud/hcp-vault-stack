@@ -29,6 +29,6 @@ provider "random" "this" {}
 provider "vault" "this" {
     config {
         address = component.cluster.public_endpoint_url
-        token   = component.cluster.bootrstrap_token
+        token   = component.cluster.bootstrap_token
     }
 }
