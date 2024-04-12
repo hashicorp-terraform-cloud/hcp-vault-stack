@@ -19,3 +19,8 @@ variable "cloud_region" {
     description = "the cloud region to use for the HCP Vault cluster"
     type        = string
 }
+
+variable "hcp_project_id" {
+    description = "the HCP project ID to use for the HCP Vault cluster"
+    type        = string
+}

@@ -11,6 +11,8 @@ required_providers {
 
 provider "hcp" "this" {
   config {
+    project_id = var.hcp_project_id
+    
     workload_identity {
       resource_name = var.workload_idp_name
       token_file    = var.identity_token_file
