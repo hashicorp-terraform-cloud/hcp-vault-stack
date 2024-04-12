@@ -11,6 +11,11 @@ required_providers {
         source = "hashicorp/vault"
         version = "~> 4.2.0" 
     }
+    tfe = {
+        source = "hashicorp/tfe"
+        version = "~> 0.53.0"
+    
+    }
 }
 
 provider "hcp" "this" {
@@ -24,11 +29,31 @@ provider "hcp" "this" {
     }
 }
 
-provider "random" "this" {}
-
 provider "vault" "this" {
     config {
         address = component.cluster.public_endpoint_url
         token   = component.cluster.bootstrap_token
     }
 }
+
+provider "vault" "that" {
+  config {
+    skip_child_token = true
+    address          = component.cluster.public_endpoint_url
+    namespace        = var.vault_namespace
+
+    auth_login_jwt {
+      jwt  = file(var.vault_identity_token_file)
+      role = var.vault_role
+    }
+  }
+}
+
+provider "tfe" "this" {
+    config {
+        organization = var.tfe_organization
+        token    = component.prereqs.tfe_token
+    }
+}
+
+provider "random" "this" {}
