@@ -35,11 +35,11 @@ component "dynamic_credentials" {
     }
 }
 
-component "pki" {
-    source = "./pki"
+// component "pki" {
+//     source = "./pki"
 
-    providers = {
-        vault = provider.vault.this
-        tls   = provider.tls.this
-    }
-}
+//     providers = {
+//         vault = provider.vault.this
+//         tls   = provider.tls.this
+//     }
+// }
