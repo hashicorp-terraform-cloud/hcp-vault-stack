@@ -36,19 +36,6 @@ provider "vault" "this" {
     }
 }
 
-provider "vault" "that" {
-  config {
-    skip_child_token = true
-    address          = component.cluster.public_endpoint_url
-    namespace        = var.vault_namespace
-
-    auth_login_jwt {
-      jwt  = file(var.vault_identity_token_file)
-      role = var.vault_role
-    }
-  }
-}
-
 provider "tfe" "this" {
     config {
         organization = var.tfc_organisation
