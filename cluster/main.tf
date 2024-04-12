@@ -11,3 +11,7 @@ resource "hcp_vault_cluster" "hcp-vault-cluster" {
   tier            = var.cluster_tier
   public_endpoint = var.expose_public_endpoint
 }
+
+resource "hcp_vault_cluster_admin_token" "bootstrap-token" {
+  cluster_id = hcp_vault_cluster.hcp-vault-cluster.cluster_id
+}

@@ -3,11 +3,11 @@ variable "cluster_id" {
 }
 
 variable "cloud_provider" {
-  type    = string
+  type = string
 }
 
 variable "cloud_region" {
-  type    = string
+  type = string
 }
 
 variable "cluster_tier" {

@@ -13,3 +13,7 @@ output "cluster_id" {
 output "hvn_id" {
   value = hcp_hvn.hcp-hvn.hvn_id
 }
+
+output "bootstrap_token" {
+  value = hcp_vault_cluster_admin_token.bootstrap-token.token
+}

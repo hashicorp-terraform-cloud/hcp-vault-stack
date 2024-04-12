@@ -19,3 +19,15 @@ component "cluster" {
         cluster_id = component.uuid.uuid
     }
 }
+
+component "dynamic_credentials" {
+    source = "./dynamic_credentials"
+
+    providers = {
+        vault = provider.vault.this
+    }
+
+    inputs = {
+        tfc_organisation = var.tfc_organisation
+    }
+}
