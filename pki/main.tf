@@ -60,7 +60,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "intermediate_ca" {
   common_name          = "OnmiCloud Intermediate CA"
   exclude_cn_from_sans = true
   ou                   = "Demo"
-  ttl                  = "2190h"
+  ttl                  = 7884000
 
 }
 
