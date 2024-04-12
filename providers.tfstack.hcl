@@ -51,7 +51,7 @@ provider "vault" "that" {
 
 provider "tfe" "this" {
     config {
-        organization = var.tfe_organisation
+        organization = var.tfc_organisation
         token    = component.prereqs.tfe_token
     }
 }
