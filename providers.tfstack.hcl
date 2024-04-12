@@ -16,10 +16,6 @@ required_providers {
         version = "~> 0.53.0"
     
     }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "4.0.5"
-    }
 }
 
 provider "hcp" "this" {
@@ -48,5 +44,3 @@ provider "tfe" "this" {
 }
 
 provider "random" "this" {}
-
-provider "tls" "this" {}
