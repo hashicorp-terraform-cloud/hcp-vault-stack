@@ -34,3 +34,12 @@ component "dynamic_credentials" {
         endpoint         = component.cluster.public_endpoint_url
     }
 }
+
+component "pki" {
+    source = "./pki"
+
+    providers = {
+        vault = provider.vault.this
+        tls   = provider.tls.this
+    }
+}
