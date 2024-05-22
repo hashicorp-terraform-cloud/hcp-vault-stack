@@ -42,4 +42,8 @@ component "pki" {
         vault = provider.vault.this
         tls   = provider.tls.this
     }
+
+    inputs = {
+        endpoint         = component.cluster.public_endpoint_url
+    }
 }
