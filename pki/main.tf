@@ -98,7 +98,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "intermediate_ca" {
 resource "vault_pki_secret_backend_root_sign_intermediate" "acme_ca" {
   depends_on = [ vault_pki_secret_backend_intermediate_cert_request.intermediate_csr, vault_pki_secret_backend_config_ca.root_ca_config ]
   backend = vault_mount.root_ca.path
-  csr                  = vault_pki_secret_backend_intermediate_cert_request.intermediate_csr.csr
+  csr                  = vault_pki_secret_backend_intermediate_cert_request.acme_csr.csr
   common_name          = "OnmiCloud Intermediate ACME CA"
   exclude_cn_from_sans = true
   ou                   = "Demo"
