@@ -31,29 +31,29 @@ locals {
 }
 
 resource "vault_mount" "root_ca" {
-    type = "pki"
-    path = "root"
-    default_lease_ttl_seconds = 86400 # 1 day
-    max_lease_ttl_seconds = 31556952 # 1 year
-    description = "OnmiCloud Demo Root CA"
+  type                      = "pki"
+  path                      = "root"
+  default_lease_ttl_seconds = 86400    # 1 day
+  max_lease_ttl_seconds     = 31556952 # 1 year
+  description               = "OnmiCloud Demo Root CA"
 }
 
 resource "vault_pki_secret_backend_config_ca" "root_ca_config" {
-  depends_on = [ tls_self_signed_cert.ca_cert, vault_mount.root_ca ]   
-  backend  = vault_mount.root_ca.path
+  depends_on = [tls_self_signed_cert.ca_cert, vault_mount.root_ca]
+  backend    = vault_mount.root_ca.path
   pem_bundle = local.ca_pem_bundle
 }
 
 resource "vault_mount" "intermediate_ca" {
-  path                      = "int"
-  type                      = "pki"
-  description               = "OnmiCloud Demo Intermediate CA"
+  path        = "int"
+  type        = "pki"
+  description = "OnmiCloud Demo Intermediate CA"
 }
 
 resource "vault_mount" "acme_ca" {
-  path                      = "acme"
-  type                      = "pki"
-  description               = "OnmiCloud Demo ACME CA"
+  path        = "acme"
+  type        = "pki"
+  description = "OnmiCloud Demo ACME CA"
 }
 
 resource "vault_pki_secret_backend_config_cluster" "acme_ca" {
@@ -63,7 +63,7 @@ resource "vault_pki_secret_backend_config_cluster" "acme_ca" {
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "intermediate_csr" {
-  depends_on = [ vault_mount.intermediate_ca ]
+  depends_on         = [vault_mount.intermediate_ca]
   backend            = vault_mount.intermediate_ca.path
   type               = "internal"
   common_name        = "OnmiCloud Intermediate Standard CA"
@@ -74,7 +74,7 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "intermediate_csr"
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "acme_csr" {
-  depends_on = [ vault_mount.acme_ca ]
+  depends_on         = [vault_mount.acme_ca]
   backend            = vault_mount.acme_ca.path
   type               = "internal"
   common_name        = "OnmiCloud Intermediate ACME CA"
@@ -86,8 +86,8 @@ resource "vault_pki_secret_backend_intermediate_cert_request" "acme_csr" {
 
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "intermediate_ca" {
-  depends_on = [ vault_pki_secret_backend_intermediate_cert_request.intermediate_csr, vault_pki_secret_backend_config_ca.root_ca_config ]
-  backend = vault_mount.root_ca.path
+  depends_on           = [vault_pki_secret_backend_intermediate_cert_request.intermediate_csr, vault_pki_secret_backend_config_ca.root_ca_config]
+  backend              = vault_mount.root_ca.path
   csr                  = vault_pki_secret_backend_intermediate_cert_request.intermediate_csr.csr
   common_name          = "OnmiCloud Intermediate Standard CA"
   exclude_cn_from_sans = true
@@ -96,8 +96,8 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "intermediate_ca" {
 }
 
 resource "vault_pki_secret_backend_root_sign_intermediate" "acme_ca" {
-  depends_on = [ vault_pki_secret_backend_intermediate_cert_request.intermediate_csr, vault_pki_secret_backend_config_ca.root_ca_config ]
-  backend = vault_mount.root_ca.path
+  depends_on           = [vault_pki_secret_backend_intermediate_cert_request.acme_csr, vault_pki_secret_backend_config_ca.root_ca_config]
+  backend              = vault_mount.root_ca.path
   csr                  = vault_pki_secret_backend_intermediate_cert_request.acme_csr.csr
   common_name          = "OnmiCloud Intermediate ACME CA"
   exclude_cn_from_sans = true
@@ -106,12 +106,12 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "acme_ca" {
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate_ca" {
-  backend = vault_mount.intermediate_ca.path
+  backend     = vault_mount.intermediate_ca.path
   certificate = "${vault_pki_secret_backend_root_sign_intermediate.intermediate_ca.certificate}\n${tls_self_signed_cert.ca_cert.cert_pem}"
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "acme_ca" {
-  backend = vault_mount.acme_ca.path
+  backend     = vault_mount.acme_ca.path
   certificate = "${vault_pki_secret_backend_root_sign_intermediate.acme_ca.certificate}\n${tls_self_signed_cert.ca_cert.cert_pem}"
 }
 

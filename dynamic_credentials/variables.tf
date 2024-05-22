@@ -4,6 +4,6 @@ variable "tfc_organisation" {
 }
 
 variable "endpoint" {
-  type = string
+  type        = string
   description = "The address of the Vault instance to authenticate against."
 }

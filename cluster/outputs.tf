@@ -15,6 +15,6 @@ output "hvn_id" {
 }
 
 output "bootstrap_token" {
-  value = hcp_vault_cluster_admin_token.bootstrap-token.token
+  value     = hcp_vault_cluster_admin_token.bootstrap-token.token
   sensitive = true
 }
