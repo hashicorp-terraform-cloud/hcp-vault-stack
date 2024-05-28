@@ -28,7 +28,7 @@ resource "vault_jwt_auth_backend_role" "workspace" {
   bound_claims = {
     sub = "organization:${data.tfe_organization.this.name}:project:*:workspace:*:run_phase:*"
   }
-  user_claim    = "terraform_organization_name"
+  user_claim    = "terraform_project_name"
   role_type     = "jwt"
   token_ttl     = 300
   token_max_ttl = 3600
