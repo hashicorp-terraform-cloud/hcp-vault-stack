@@ -15,11 +15,11 @@ resource "vault_kubernetes_auth_backend_role" "openshift-role" {
   role_name                        = "openshift-role"
   bound_service_account_names      = ["*"]
   bound_service_account_namespaces = ["*"]
-  token_policies                   = [vault_policy.kubernetes-policy.name]
+  token_policies                   = [vault_policy.openshift-policy.name]
 }
 
-resource "vault_policy" "kubernetes-policy" {
-  name = "kubernetes-policy"
+resource "vault_policy" "openshift-policy" {
+  name = "openshift-policy"
 
   policy = <<EOT
 
