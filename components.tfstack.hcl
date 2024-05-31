@@ -47,3 +47,16 @@ component "pki" {
         endpoint         = component.cluster.public_endpoint_url
     }
 }
+
+component "kubernetes" {
+    source = "./kubernetes"
+
+    providers = {
+        vault = provider.vault.this
+    }
+
+    inputs = {
+        kubernetes_ca_bundle = component.prereqs.kubernetes_ca_bundle
+        kubernetes_token_reviewer_jwt = component.prereqs.kubernetes_token_reviewer_jwt
+    }
+}
