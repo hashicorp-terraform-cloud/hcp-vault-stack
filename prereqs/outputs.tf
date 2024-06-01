@@ -19,4 +19,5 @@ output "kubernetes_token_reviewer_jwt" {
 
 output "kubernetes_cluster_api" {
   value = data.hcp_vault_secrets_secret.kubernetes_cluster_api.secret_value
+  sensitive = true
 }
