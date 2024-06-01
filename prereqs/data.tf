@@ -12,3 +12,8 @@ data "hcp_vault_secrets_secret" "kubernetes_token_reviewer_jwt" {
   app_name    = "Stacks"
   secret_name = "KUBERNETES_TOKEN_REVIEWER_JWT"
 }
+
+data "hcp_vault_secrets_secret" "kubernetes_cluster_api" {
+  app_name    = "Stacks"
+  secret_name = "KUBERNETES_CLUSTER_API"
+}

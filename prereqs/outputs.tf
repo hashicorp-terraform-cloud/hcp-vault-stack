@@ -8,11 +8,15 @@ output "tfe_token" {
 }
 
 output "kubernetes_ca_bundle" {
-  value = data.hcp_vault_secrets_secret.kubernetes_ca_bundle.secret_value
+  value     = data.hcp_vault_secrets_secret.kubernetes_ca_bundle.secret_value
   sensitive = true
 }
 
 output "kubernetes_token_reviewer_jwt" {
-  value = data.hcp_vault_secrets_secret.kubernetes_token_reviewer_jwt.secret_value
+  value     = data.hcp_vault_secrets_secret.kubernetes_token_reviewer_jwt.secret_value
   sensitive = true
+}
+
+output "kubernetes_cluster_api" {
+  value = data.hcp_vault_secrets_secret.kubernetes_cluster_api.secret_value
 }

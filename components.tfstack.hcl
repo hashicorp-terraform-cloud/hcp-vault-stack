@@ -56,7 +56,8 @@ component "kubernetes" {
     }
 
     inputs = {
-        kubernetes_ca_bundle = component.prereqs.kubernetes_ca_bundle
+        kubernetes_ca_bundle          = component.prereqs.kubernetes_ca_bundle
         kubernetes_token_reviewer_jwt = component.prereqs.kubernetes_token_reviewer_jwt
+        kubernetes_cluster_api        = component.prereqs.kubernetes_cluster_api
     }
 }

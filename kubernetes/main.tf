@@ -1,11 +1,11 @@
 resource "vault_auth_backend" "openshift" {
-  type      = "kubernetes"
-  path      = "openshift"
+  type = "kubernetes"
+  path = "openshift"
 }
 
 resource "vault_kubernetes_auth_backend_config" "openshift-backend-config" {
   backend            = vault_auth_backend.openshift.path
-  kubernetes_host    = "https://api.hoth.onmi.cloud:6443"
+  kubernetes_host    = var.kubernetes_cluster_api
   kubernetes_ca_cert = var.kubernetes_ca_bundle
   token_reviewer_jwt = var.kubernetes_token_reviewer_jwt
 }
